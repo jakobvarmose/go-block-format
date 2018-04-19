@@ -7,9 +7,9 @@ import (
 	"errors"
 	"fmt"
 
-	cid "github.com/ipfs/go-cid"
-	u "github.com/ipfs/go-ipfs-util"
-	mh "github.com/multiformats/go-multihash"
+	u "gx/ipfs/QmNiJuT8Ja3hMVpBHXv3Q6dwmperaQ6JjLtpMQgMCD7xvx/go-ipfs-util"
+	mh "gx/ipfs/QmZyZDi491cCNTLfAhwcaDii2Kg4pwKRkhqQzURGDvY6ua/go-multihash"
+	cid "gx/ipfs/QmcZfnkapfECQGcLZaf9B79NRg7cRa9EnZh4LSbkCzwNvY/go-cid"
 )
 
 // ErrWrongHash is returned when the Cid of a block is not the expected
@@ -22,6 +22,7 @@ type Block interface {
 	Cid() *cid.Cid
 	String() string
 	Loggable() map[string]interface{}
+	ToPublic() (Block, error)
 }
 
 // A BasicBlock is a singular block of data in ipfs. It implements the Block
@@ -79,4 +80,8 @@ func (b *BasicBlock) Loggable() map[string]interface{} {
 	return map[string]interface{}{
 		"block": b.Cid().String(),
 	}
+}
+
+func (b *BasicBlock) ToPublic() (Block, error) {
+	return b, nil
 }
